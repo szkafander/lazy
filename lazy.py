@@ -24,14 +24,15 @@
 
 
 def lazy_evaluation(lazy=True, cached=False):
-    """ A decorator that converts a method to a lazily evaluated method. The
+        """ A decorator that converts a method to a lazily evaluated method. The
     method returns a Data wrapper object. Decorator arguments provide flags for
     caching and lazy evaluation.
     
     Behavior:
         - if lazy and not cached, value is always computed on access
         - if not lazy and not cached, value is computed once on assignment
-        - if cached, value is always lazy
+        - if cached, value is always lazy and computed only on assignment 
+            if arguments have changed or function has not been called before
     """
     def lazy_eval(function):
         def wrapper(*args, **kwargs):
