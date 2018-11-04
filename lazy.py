@@ -60,7 +60,6 @@ class cached_function:
         if self.cache and not args_changed:
             return self.cache
         else:
-            print('function run')
             self.cache = self.function(*args, **kwargs)
             return self.cache
     
