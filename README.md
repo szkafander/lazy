@@ -2,9 +2,9 @@
 A trivial Python utility for converting methods to lazily evaluated and/or cached methods.
 
 ## Usage
-
-import lazy
 ```
+import lazy
+
 @lazy.lazy_evaluation(lazy=True, cached=True)
 def your_method...
 ```
