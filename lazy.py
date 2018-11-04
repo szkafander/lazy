@@ -23,19 +23,49 @@
 # =============================================================================
 
 
+# This is a convenience module that has decorators for converting methods
+# to lazily evaluated and/or cached methods.
+#
+# Copyright (c) 2018 Pal Toth
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in 
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# =============================================================================
+
+
 def lazy_evaluation(lazy=True, cached=False):
     """ A decorator that converts a method to a lazily evaluated method. The
     method returns a Data wrapper object. Decorator arguments provide flags for
     caching and lazy evaluation.
+    
+    Behavior:
+        - if lazy and not cached, value is always computed on access
+        - if not lazy and not cached, value is computed once on assignment
+        - if cached, value is always lazy
     """
     def lazy_eval(function):
         def wrapper(*args, **kwargs):
             def inner():
                 return function(*args, **kwargs)
-            if cached:
-                inner = cached_function(inner)
-            if lazy:
+            if lazy and not cached:
                 return Data(inner)
+            elif cached:
+                return Data(cached_function(inner))
             else:
                 return Data(function(*args, **kwargs))
         return wrapper
@@ -47,7 +77,7 @@ class cached_function:
     It is different from functools.lru_cache in the sense that it does not
     keep a history of calls but rather updates cache every time the arguments
     change. This is better suited for methods that are normally evaluated
-    only once, e.g., for computing filter weights or other constants.
+    only once, e.g., for computing large constants.
     """
     def __init__(self, function):
         self.function = function
