@@ -86,7 +86,7 @@ class Data:
             decorator returns a function ipso facto.
     
     Properties:
-        value - returns the stored data. If Data is lazily evaluated, returns a
+        value - returns the stored data. If Data is lazily evaluated, returns
             the output of a call of the underlying _value attribute.
     """
     def __init__(self, value):
