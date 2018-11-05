@@ -24,7 +24,7 @@
 
 
 def lazy_evaluation(lazy=True, cached=False):
-        """ A decorator that converts a method to a lazily evaluated method. The
+    """ A decorator that converts a method to a lazily evaluated method. The
     method returns a Data wrapper object. Decorator arguments provide flags for
     caching and lazy evaluation.
     
