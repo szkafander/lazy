@@ -17,9 +17,11 @@ import namespaces
 class MyNetworks:
     def network1(*args, **kwargs):
         ...
+        return keras.layers.some_layer(some_args)(input)
     
     def network2(*args, **kwargs):
         ...
+        return keras.layers.some_layer(some_args)(input)
 ```
 
-The decorated namespace methods will mimic the behavior of Keras layers.
+The decorated namespace methods will mimic the behavior of Keras layers. Each method should return a model defined by using the functional API.
