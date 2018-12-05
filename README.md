@@ -1,5 +1,5 @@
 # lazy
-A growing collection of productivity tools that I use when working with Keras layers. Useful for manipulating namespaces (classes with only static methods). Has methods for converting functions to lazily evaluated and/or cached methods. Has methods to convert functions to a few sorts of factory methods. Useful for e.g., converting a namespace of neural network topologies to objects that mimic the behavior of Keras layers.
+A subset of a growing collection of productivity tools that I use when working with Keras layers. Useful for manipulating namespaces (classes with only static methods). Has methods for converting functions to lazily evaluated and/or cached methods. Has methods to convert functions to a few sorts of factory methods. Useful for e.g., converting a namespace of neural network topologies to objects that mimic the behavior of Keras layers.
 
 ## Usage
 ```
