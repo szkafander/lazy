@@ -2,13 +2,15 @@
 A subset of a growing collection of productivity tools that I use when working with Keras layers. Useful for manipulating namespaces (classes with only static methods). Has methods for converting functions to lazily evaluated and/or cached methods. Has methods to convert functions to a few sorts of factory methods. Useful for e.g., converting a namespace of neural network topologies to objects that mimic the behavior of Keras layers.
 
 ## Usage
+Example snippets for each module.
+### lazy
 ```
 import lazy
 
 @lazy.lazy_evaluation(lazy=True, cached=True)
 def your_method...
 ```
-
+### namespaces
 The decorated method returns a Data wrapper object. Lazily evaluated and/or cached data can be accessed by the `value` property of the returned Data object.
 
 ```
@@ -26,7 +28,7 @@ class MyNetworks:
 ```
 
 The decorated namespace methods will mimic the behavior of Keras layers. Each method should return a model defined by using the functional API.
-
+### layer_group
 ```
 import layer_group
 
