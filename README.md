@@ -8,6 +8,7 @@ import lazy
 @lazy.lazy_evaluation(lazy=True, cached=True)
 def your_method...
 ```
+
 The decorated method returns a Data wrapper object. Lazily evaluated and/or cached data can be accessed by the `value` property of the returned Data object.
 
 ```
@@ -25,3 +26,30 @@ class MyNetworks:
 ```
 
 The decorated namespace methods will mimic the behavior of Keras layers. Each method should return a model defined by using the functional API.
+
+```
+import layer_group
+
+def op(*args, **kwargs) -> tf.Tensor:
+    ...
+
+MyLayer = LayerGroup("MyLayer", op)
+
+model = Model(inputs=[inp], outputs=[MyLayer(inp)])
+model.summary()
+
+Model: "model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         [(None, 5)]               0         
+_________________________________________________________________
+my_layer (MyLayer)           (None, 50)                300       
+=================================================================
+Total params: 300
+Trainable params: 300
+Non-trainable params: 0
+_________________________________________________________________
+```
+
+Your op will appear as a compact layer group, and will no longer pollute summaries and graph plots.
