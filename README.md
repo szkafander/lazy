@@ -30,7 +30,11 @@ The decorated namespace methods will mimic the behavior of Keras layers. Each me
 ```
 import layer_group
 
-def op(*args, **kwargs) -> tf.Tensor:
+from tensorflow import Tensor
+from tensorflow.keras import Model
+
+
+def op(*args, **kwargs) -> Tensor:
     ...
 
 MyLayer = LayerGroup("MyLayer", op)
